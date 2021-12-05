@@ -1,0 +1,36 @@
+
+
+{% extends 'logout.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-1 col-md-3"></div>
+        <div class="col-10 col-md-6">
+            <form method="post" action="{% url 'addTodo' %}">
+                {% csrf_token %}
+                <div class="d-flex justify-content-center">
+                    <input placeholder="Enter Todo" name="todo" type="text" class="form-control text-center">
+                    <input type="button" class="btn btn-primary" value="Add">
+                </div>
+            </form>
+
+            <table class="table table-striped mt-3">
+                <tr class="bg-primary">
+                    <th class="text-light" style="width: 80%;">Task</th>
+                    <th class="text-light">Action</th>
+                </tr>
+                {% for todo in todos %}
+                <tr>
+                    <td>{{todo.title}}</td>
+                    <td><a href="/delete/{{todo.id}}/" class="btn btn-sm btn-danger">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-1 col-md-3"></div>
+    </div>
+</div>
+
+
+{% endblock %}
